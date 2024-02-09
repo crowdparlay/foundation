@@ -37,13 +37,8 @@ jobs:
         run: npm install -g @redocly/cli@1.8.0
       - name: 🔀 Merge OpenAPI specifications
         run: redocly join ./*.yaml -o openapi.yaml
-  publish:
-    name: Deploy API documentation to Bump.sh
-    if: ${{ inputs.publish }}
-    needs: merge
-    runs-on: ubuntu-latest
-    steps:
       - name: 🚀 Deploy API documentation to Bump.sh
+        if: ${{ inputs.publish }}
         uses: bump-sh/github-action@v1
         with:
           doc: ${{ vars.BUMP_SH_DOCUMENTATION }}
