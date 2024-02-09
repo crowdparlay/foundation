@@ -27,7 +27,7 @@ jobs:
         run: echo "$COMMON_OPENAPI_CONTENT" > common.yaml
       - name: 📥 Download OpenAPI specifications
         run: |
-          repos=("crowdparlay/users" "crowdparlay/social")
+          repos=("crowdparlay/social")
           for repo in "${repos[@]}"
           do
               echo "Downloading openapi.yaml asset from the latest release of $repo"
