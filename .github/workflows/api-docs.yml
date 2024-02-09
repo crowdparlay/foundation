@@ -19,9 +19,9 @@ jobs:
           - url: https://crowdparlay.com
             description: Production
     steps:
-      - name: Extract common OpenAPI content to common.yaml
+      - name: 📦 Extract common OpenAPI content to common.yaml
         run: echo "$COMMON_OPENAPI_CONTENT" > common.yaml
-      - name: Download OpenAPI specifications
+      - name: 📥 Download OpenAPI specifications
         run: |
           repos=("crowdparlay/users" "crowdparlay/social")
           for repo in "${repos[@]}"
@@ -29,11 +29,11 @@ jobs:
               echo "Downloading openapi.yaml asset from the latest release of $repo"
               wget -O "${repo//\//_}.yaml" "https://github.com/$repo/releases/latest/download/openapi.yaml"
           done
-      - name: Install Redocly CLI
+      - name: ⚙️ Install Redocly CLI
         run: npm install -g @redocly/cli@1.8.0
-      - name: Merge OpenAPI specifications
+      - name: 🔀 Merge OpenAPI specifications
         run: redocly join ./*.yaml -o openapi.yaml
-      - name: Deploy API documentation to Bump.sh
+      - name: 🚀 Deploy API documentation to Bump.sh
         uses: bump-sh/github-action@v1
         with:
           doc: ${{ vars.BUMP_SH_DOCUMENTATION }}
